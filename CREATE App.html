@@ -1,0 +1,2797 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="CREATE">
+<meta name="theme-color" content="#59695E">
+<title>CREATE — Tile Depot Manager App</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<!-- Manrope is used as a close open-source stand-in for Niveau Grotesk
+     (same geometric neo-grotesque feel, with matching light/regular/bold weights). -->
+<style>/* cyrillic-ext */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("2094a55a-52de-4c7b-9bfa-494c3c5d1ce6") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("d6763f16-8a72-4b29-8523-112456d39361") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("b4044a5a-5d2d-49e0-b476-5b2f54ad2210") format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("240b0628-db9d-46bd-bece-d1a381338f76") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("3b9809fa-8661-478f-8b41-0d2ebfbd996f") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("51b32d8d-404f-4a1c-8111-abe3ab509da3") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("2094a55a-52de-4c7b-9bfa-494c3c5d1ce6") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("d6763f16-8a72-4b29-8523-112456d39361") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("b4044a5a-5d2d-49e0-b476-5b2f54ad2210") format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("240b0628-db9d-46bd-bece-d1a381338f76") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("3b9809fa-8661-478f-8b41-0d2ebfbd996f") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("51b32d8d-404f-4a1c-8111-abe3ab509da3") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("2094a55a-52de-4c7b-9bfa-494c3c5d1ce6") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("d6763f16-8a72-4b29-8523-112456d39361") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("b4044a5a-5d2d-49e0-b476-5b2f54ad2210") format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("240b0628-db9d-46bd-bece-d1a381338f76") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("3b9809fa-8661-478f-8b41-0d2ebfbd996f") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("51b32d8d-404f-4a1c-8111-abe3ab509da3") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("2094a55a-52de-4c7b-9bfa-494c3c5d1ce6") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("d6763f16-8a72-4b29-8523-112456d39361") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("b4044a5a-5d2d-49e0-b476-5b2f54ad2210") format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("240b0628-db9d-46bd-bece-d1a381338f76") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("3b9809fa-8661-478f-8b41-0d2ebfbd996f") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("51b32d8d-404f-4a1c-8111-abe3ab509da3") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("2094a55a-52de-4c7b-9bfa-494c3c5d1ce6") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("d6763f16-8a72-4b29-8523-112456d39361") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("b4044a5a-5d2d-49e0-b476-5b2f54ad2210") format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("240b0628-db9d-46bd-bece-d1a381338f76") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("3b9809fa-8661-478f-8b41-0d2ebfbd996f") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("51b32d8d-404f-4a1c-8111-abe3ab509da3") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+</style>
+<style>
+:root {
+  /* ── TILE DEPOT BRAND ────────────────────────────── */
+  /* Tile Depot Green — Aalto Parklands, RGB 89/105/94 */
+  --td-green:      #59695E;
+  --td-green-dk:   #3E4B43;
+  --td-green-lt:   #DDE3DF;
+  --td-green-xl:   #EFF2F0;
+  /* Tile Depot White — Resene Whitewater, RGB 228/227/224 */
+  --td-white:      #E4E3E0;
+  --td-white-pure: #FFFFFF;
+  /* Neutrals tuned to the brand green */
+  --td-ink:        #1E2620;
+  --td-ink-md:     #4A5450;
+  --td-grey:       #7C857F;
+  --td-grey-md:    #D6D7D3;
+  --td-grey-lt:    #EEEEEB;
+  /* Status (kept for traffic-light, but muted to sit next to TD Green) */
+  --red:    #B6412F;
+  --amber:  #C8862A;
+  --go:     #4C8A5C;
+  /* Motion / form */
+  --shadow:  0 2px 14px rgba(30, 38, 32, 0.07);
+  --shadow-lg: 0 6px 24px rgba(30, 38, 32, 0.10);
+  --radius:  10px;
+  --radius-sm: 6px;
+  /* Type */
+  --font: "Niveau Grotesk", "Manrope", -apple-system, "Helvetica Neue", Arial, sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+  font-family: var(--font);
+  font-weight: 400;
+  background: var(--td-white);
+  color: var(--td-ink);
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: 0.005em;
+}
+
+/* ── APP SHELL ─────────────────────────────────────── */
+#app {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--td-white);
+}
+
+/* ── SCREENS ───────────────────────────────────────── */
+.screen {
+  display: none;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+.screen.active { display: flex; }
+
+/* ── TOP BAR ───────────────────────────────────────── */
+.topbar {
+  background: var(--td-green);
+  padding: env(safe-area-inset-top, 0) 0 0;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.topbar-inner {
+  display: flex;
+  align-items: center;
+  padding: 14px 18px;
+  gap: 12px;
+  min-height: 56px;
+}
+
+.topbar-back {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.12);
+  border: none;
+  color: var(--td-white-pure);
+  font-size: 20px;
+  font-weight: 300;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  touch-action: manipulation;
+  line-height: 1;
+  padding-bottom: 2px;
+}
+
+.topbar-title { flex: 1; }
+
+.topbar-eyebrow {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--td-white);
+  opacity: 0.7;
+  text-transform: uppercase;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.topbar-heading {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--td-white-pure);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+/* The brand's "vertical strip" motif — a clean green-on-white rule.
+   Used in place of the old gold stripe. */
+.td-rule {
+  height: 2px;
+  background: var(--td-white);
+  opacity: 0.25;
+}
+
+/* ── SCROLL CONTENT ────────────────────────────────── */
+.scroll-content {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: env(safe-area-inset-bottom, 20px);
+  background: var(--td-white);
+}
+
+/* ══════════════════════════════════════════════════════
+   HOME SCREEN
+══════════════════════════════════════════════════════ */
+.home-hero {
+  background: var(--td-green);
+  padding: 32px 20px 34px;
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Green vertical strip motif from the brand guidelines — a quiet block
+   of deeper green on the right edge for architectural rhythm. */
+.home-hero::after {
+  content: "";
+  position: absolute;
+  top: 0; bottom: 0; right: 0;
+  width: 14px;
+  background: var(--td-green-dk);
+}
+
+.td-logo {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.08em;
+  color: var(--td-white-pure);
+  line-height: 1;
+  margin-bottom: 18px;
+  font-family: var(--font);
+}
+.td-logo .td-tile {
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+}
+.td-logo .td-depot {
+  font-size: 26px;
+  font-weight: 300;
+  letter-spacing: 0.02em;
+}
+
+.home-title {
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--td-white-pure);
+  letter-spacing: -0.02em;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.home-sub {
+  font-size: 13px;
+  color: var(--td-white);
+  opacity: 0.72;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+.home-tiles {
+  padding: 18px 16px 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.tile {
+  background: var(--td-white-pure);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 18px 18px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  cursor: pointer;
+  touch-action: manipulation;
+  border: 1px solid var(--td-grey-md);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+}
+
+.tile::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 14px; bottom: 14px;
+  width: 3px;
+  background: var(--td-green);
+  border-radius: 0 2px 2px 0;
+  opacity: 0;
+  transition: opacity 0.12s ease;
+}
+.tile:active::before { opacity: 1; }
+
+.tile:active {
+  transform: scale(0.985);
+  box-shadow: 0 1px 4px rgba(30,38,32,0.06);
+}
+
+.tile-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  background: var(--td-green-xl);
+  color: var(--td-green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.tile-icon svg { width: 22px; height: 22px; }
+
+.tile-body { flex: 1; }
+
+.tile-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--td-grey);
+  margin-bottom: 3px;
+}
+
+.tile-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--td-ink);
+  margin-bottom: 3px;
+  letter-spacing: -0.005em;
+}
+
+.tile-desc {
+  font-size: 12.5px;
+  color: var(--td-ink-md);
+  line-height: 1.45;
+}
+
+.tile-arrow {
+  color: var(--td-grey);
+  font-size: 22px;
+  flex-shrink: 0;
+  font-weight: 300;
+}
+
+.home-footer {
+  padding: 18px 20px 8px;
+  text-align: center;
+}
+
+.home-footer p {
+  font-size: 10px;
+  color: var(--td-grey);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+/* ══════════════════════════════════════════════════════
+   LAUNCH SCRIPT
+══════════════════════════════════════════════════════ */
+.script-list {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.script-section {
+  background: var(--td-white-pure);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  border: 1px solid var(--td-grey-md);
+}
+
+.script-section-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 18px;
+  background: var(--td-white-pure);
+  cursor: pointer;
+  touch-action: manipulation;
+  user-select: none;
+  border-bottom: 1px solid transparent;
+  transition: background 0.1s;
+}
+
+.script-section-header:active { background: var(--td-grey-lt); }
+
+.script-section.open .script-section-header {
+  border-bottom-color: var(--td-green-lt);
+}
+
+.ss-num {
+  width: 32px;
+  height: 32px;
+  border-radius: 2px;
+  background: var(--td-green);
+  color: var(--td-white-pure);
+  font-weight: 700;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  letter-spacing: 0;
+}
+
+.ss-meta { flex: 1; }
+
+.ss-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--td-ink);
+  letter-spacing: -0.005em;
+}
+
+.ss-time {
+  font-size: 10.5px;
+  color: var(--td-grey);
+  margin-top: 2px;
+  letter-spacing: 0.06em;
+  font-variant-numeric: tabular-nums;
+}
+
+.ss-chevron {
+  font-size: 14px;
+  color: var(--td-grey);
+  transition: transform 0.2s ease;
+  font-weight: 300;
+}
+
+.script-section.open .ss-chevron { transform: rotate(180deg); }
+
+.ss-body {
+  display: none;
+  padding: 16px 18px;
+}
+
+.script-section.open .ss-body { display: block; }
+
+/* Say This — restated in brand terms: green quote block on
+   near-white, no gold. */
+.say-this {
+  background: var(--td-green-xl);
+  border-left: 3px solid var(--td-green);
+  border-radius: 0 8px 8px 0;
+  padding: 14px 16px;
+  margin-bottom: 14px;
+}
+
+.say-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--td-green);
+  margin-bottom: 8px;
+}
+
+.say-text {
+  font-size: 14px;
+  font-style: italic;
+  color: var(--td-green-dk);
+  line-height: 1.7;
+  font-weight: 400;
+}
+
+.say-text + .say-text { margin-top: 8px; }
+
+/* Delivery note */
+.delivery-note {
+  background: var(--td-grey-lt);
+  border-radius: 6px;
+  padding: 10px 14px;
+  margin-bottom: 14px;
+  font-size: 13px;
+  color: var(--td-ink-md);
+  line-height: 1.5;
+}
+
+.delivery-note strong {
+  color: var(--td-green);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 4px;
+  font-weight: 700;
+}
+
+/* Non-neg rows */
+.nn-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--td-grey-md);
+}
+.nn-row:last-child { border-bottom: none; }
+
+.nn-badge {
+  width: 32px;
+  height: 32px;
+  border-radius: 2px;
+  background: var(--td-green);
+  color: var(--td-white-pure);
+  font-weight: 700;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.nn-step {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--td-ink);
+  margin-bottom: 2px;
+  letter-spacing: -0.005em;
+}
+
+.nn-phrase {
+  font-size: 12.5px;
+  font-style: italic;
+  color: var(--td-green-dk);
+  line-height: 1.5;
+}
+
+/* Weapon items */
+.weapon {
+  display: flex;
+  gap: 12px;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--td-grey-md);
+  align-items: flex-start;
+}
+.weapon:last-child { border-bottom: none; }
+
+.weapon-n {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--td-green);
+  color: var(--td-white-pure);
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.weapon-nm {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--td-ink);
+  margin-bottom: 2px;
+}
+
+.weapon-ds {
+  font-size: 12.5px;
+  color: var(--td-ink-md);
+  line-height: 1.5;
+}
+
+/* Pathway cards */
+.pathway-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.pathway-card {
+  background: var(--td-green);
+  border-radius: 8px;
+  padding: 14px;
+  position: relative;
+  overflow: hidden;
+}
+.pathway-card::after {
+  content: "";
+  position: absolute;
+  top: 0; bottom: 0; right: 0;
+  width: 4px;
+  background: var(--td-green-dk);
+}
+
+.pathway-card h4 {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--td-white);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  opacity: 0.85;
+}
+
+.pathway-card ul {
+  list-style: none;
+  font-size: 11.5px;
+  line-height: 1.6;
+}
+
+.pathway-card ul li {
+  color: var(--td-white-pure);
+  padding-left: 12px;
+  position: relative;
+  margin-bottom: 4px;
+}
+
+.pathway-card ul li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 6px;
+  height: 1.5px;
+  background: var(--td-white);
+  opacity: 0.7;
+}
+
+/* Set it up steps */
+.setup-item {
+  padding: 11px 0;
+  border-bottom: 1px solid var(--td-grey-md);
+}
+.setup-item:last-child { border-bottom: none; }
+
+.setup-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--td-green);
+  margin-bottom: 5px;
+}
+
+.setup-text {
+  font-size: 13px;
+  color: var(--td-ink-md);
+  line-height: 1.5;
+}
+
+/* Complete banner */
+.complete-card {
+  background: var(--td-green);
+  border-radius: var(--radius);
+  padding: 26px 22px;
+  margin: 0 16px 16px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.complete-card::after {
+  content: "";
+  position: absolute;
+  top: 0; bottom: 0; right: 0;
+  width: 8px;
+  background: var(--td-green-dk);
+}
+
+.complete-card h3 {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--td-white-pure);
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+
+.complete-card p {
+  font-size: 13px;
+  color: var(--td-white);
+  opacity: 0.8;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+.complete-card .accent {
+  color: var(--td-white-pure);
+  font-weight: 500;
+  font-style: normal;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: 11px;
+  display: block;
+  margin-bottom: 4px;
+  opacity: 0.9;
+}
+
+/* ══════════════════════════════════════════════════════
+   OPERATING SYSTEM
+══════════════════════════════════════════════════════ */
+.os-content {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.os-card {
+  background: var(--td-white-pure);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  border: 1px solid var(--td-grey-md);
+}
+
+.os-card-header {
+  background: var(--td-green);
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+}
+.os-card-header::after {
+  content: "";
+  position: absolute;
+  top: 0; bottom: 0; right: 0;
+  width: 4px;
+  background: var(--td-green-dk);
+}
+
+.os-card-icon {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--td-white-pure);
+  flex-shrink: 0;
+}
+.os-card-icon svg { width: 22px; height: 22px; }
+
+.os-card-title {
+  font-size: 14.5px;
+  font-weight: 700;
+  color: var(--td-white-pure);
+  flex: 1;
+  letter-spacing: -0.005em;
+}
+
+.os-card-sub {
+  font-size: 10px;
+  color: var(--td-white);
+  opacity: 0.75;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+.os-card-body {
+  padding: 14px 18px;
+}
+
+.os-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--td-grey-md);
+}
+.os-row:last-child { border-bottom: none; }
+
+.os-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--td-green);
+  margin-top: 8px;
+  flex-shrink: 0;
+}
+
+.os-row-text {
+  font-size: 13px;
+  color: var(--td-ink-md);
+  line-height: 1.55;
+  flex: 1;
+}
+
+.os-row-text strong {
+  color: var(--td-ink);
+  font-weight: 700;
+}
+
+/* Daily question card */
+.daily-q-card {
+  background: var(--td-white-pure);
+  border: 1px solid var(--td-green-lt);
+  border-left: 3px solid var(--td-green);
+  border-radius: var(--radius);
+  padding: 22px 22px;
+  text-align: left;
+  box-shadow: var(--shadow);
+}
+
+.daily-q-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--td-green);
+  margin-bottom: 10px;
+}
+
+.daily-q-text {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--td-ink);
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+}
+
+/* ══════════════════════════════════════════════════════
+   TRAFFIC LIGHT
+══════════════════════════════════════════════════════ */
+.tl-content {
+  padding: 16px;
+}
+
+.tl-intro {
+  background: var(--td-white-pure);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  margin-bottom: 12px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--td-grey-md);
+}
+
+.tl-intro p {
+  font-size: 13px;
+  color: var(--td-ink-md);
+  line-height: 1.6;
+}
+
+.tl-intro strong {
+  color: var(--td-green-dk);
+  font-weight: 700;
+}
+
+.tl-letter-card {
+  background: var(--td-white-pure);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin-bottom: 10px;
+  overflow: hidden;
+  border: 1px solid var(--td-grey-md);
+}
+
+.tl-letter-header {
+  background: var(--td-green);
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  position: relative;
+}
+.tl-letter-header::after {
+  content: "";
+  position: absolute;
+  top: 0; bottom: 0; right: 0;
+  width: 4px;
+  background: var(--td-green-dk);
+}
+
+.tl-badge {
+  width: 38px;
+  height: 38px;
+  border-radius: 4px;
+  background: var(--td-white-pure);
+  color: var(--td-green);
+  font-size: 20px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.tl-step-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--td-white-pure);
+  flex: 1;
+  letter-spacing: -0.005em;
+}
+
+.tl-nn {
+  font-size: 11px;
+  color: var(--td-white);
+  opacity: 0.75;
+  margin-top: 3px;
+  font-style: italic;
+}
+
+.tl-rating-row {
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--td-green-lt);
+}
+
+.tl-rating-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--td-grey);
+  margin-bottom: 10px;
+}
+
+.tl-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.tl-btn {
+  flex: 1;
+  padding: 12px 8px;
+  border: 1.5px solid var(--td-grey-md);
+  border-radius: 6px;
+  background: var(--td-white-pure);
+  font-family: var(--font);
+  font-size: 12.5px;
+  font-weight: 700;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: all 0.15s ease;
+  text-align: center;
+  color: var(--td-grey);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.tl-btn.green { border-color: var(--go); color: var(--go); }
+.tl-btn.amber { border-color: var(--amber); color: var(--amber); }
+.tl-btn.red   { border-color: var(--red); color: var(--red); }
+
+.tl-btn.selected.green { background: var(--go); color: var(--td-white-pure); }
+.tl-btn.selected.amber { background: var(--amber); color: var(--td-white-pure); }
+.tl-btn.selected.red   { background: var(--red); color: var(--td-white-pure); }
+
+.tl-behaviours {
+  padding: 12px 18px 14px;
+}
+
+.tl-beh-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--td-grey);
+  margin-bottom: 10px;
+}
+
+.tl-beh-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 6px 0;
+}
+
+.tl-check {
+  width: 20px;
+  height: 20px;
+  border-radius: 3px;
+  border: 1.5px solid var(--td-grey-md);
+  background: var(--td-white-pure);
+  cursor: pointer;
+  touch-action: manipulation;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: transparent;
+  transition: all 0.15s ease;
+  margin-top: 1px;
+  font-weight: 700;
+}
+
+.tl-check.checked {
+  background: var(--td-green);
+  border-color: var(--td-green);
+  color: var(--td-white-pure);
+}
+
+.tl-beh-text {
+  font-size: 13px;
+  color: var(--td-ink-md);
+  line-height: 1.5;
+  flex: 1;
+}
+
+/* Summary */
+.tl-summary {
+  background: var(--td-white-pure);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  margin-top: 4px;
+  border: 1px solid var(--td-grey-md);
+}
+
+.tl-summary-header {
+  background: var(--td-green-dk);
+  padding: 14px 18px;
+}
+
+.tl-summary-header h3 {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--td-white-pure);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.tl-summary-body {
+  padding: 14px 18px;
+}
+
+.tl-summary-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--td-grey-md);
+}
+
+.tl-summary-row:last-child { border-bottom: none; }
+
+.tl-summary-step {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--td-ink);
+}
+
+.tl-summary-dot {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--td-white-pure);
+  background: var(--td-grey-md);
+}
+
+.tl-summary-dot.green { background: var(--go); }
+.tl-summary-dot.amber { background: var(--amber); }
+.tl-summary-dot.red   { background: var(--red); }
+
+.tl-actions {
+  padding: 14px 18px;
+  display: flex;
+  gap: 10px;
+  border-top: 1px solid var(--td-green-lt);
+}
+
+.tl-action-btn {
+  flex: 1;
+  padding: 13px;
+  border-radius: 6px;
+  border: none;
+  font-family: var(--font);
+  font-size: 12.5px;
+  font-weight: 700;
+  cursor: pointer;
+  touch-action: manipulation;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.tl-action-btn.primary {
+  background: var(--td-green);
+  color: var(--td-white-pure);
+}
+
+.tl-action-btn.secondary {
+  background: var(--td-white-pure);
+  color: var(--td-ink-md);
+  border: 1px solid var(--td-grey-md);
+}
+
+/* Saved flash */
+.save-flash {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--td-green-dk);
+  color: var(--td-white-pure);
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-size: 12.5px;
+  font-weight: 600;
+  opacity: 0;
+  transition: all 0.3s ease;
+  pointer-events: none;
+  z-index: 999;
+  white-space: nowrap;
+  letter-spacing: 0.04em;
+}
+
+.save-flash.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Week display */
+.week-display {
+  background: var(--td-white-pure);
+  border: 1px solid var(--td-grey-md);
+  border-left: 3px solid var(--td-green);
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.week-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--td-grey);
+}
+
+.week-value {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--td-green-dk);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── STORE PICKER OVERLAY ─────────────────────────── */
+.store-overlay {
+  position: fixed; inset: 0; z-index: 10000;
+  background: rgba(30,38,32,0.78);
+  display: none; align-items: center; justify-content: center;
+  padding: 20px;
+}
+.store-overlay.show { display: flex; }
+.store-card {
+  background: var(--td-white-pure);
+  border-radius: 14px;
+  padding: 24px 22px 20px;
+  max-width: 340px; width: 100%;
+  box-shadow: var(--shadow-lg);
+}
+.store-card h2 {
+  font-size: 17px; font-weight: 800; color: var(--td-ink);
+  letter-spacing: -0.2px; margin-bottom: 4px;
+}
+.store-card p {
+  font-size: 13px; color: var(--td-ink-md);
+  line-height: 1.45; margin-bottom: 14px;
+}
+.store-select {
+  width: 100%; padding: 12px 14px;
+  font-size: 15px; font-family: inherit;
+  border: 1.5px solid var(--td-grey-md);
+  border-radius: 10px;
+  background: var(--td-grey-lt);
+  color: var(--td-ink);
+  margin-bottom: 12px;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.store-select:focus { outline: none; border-color: var(--td-green-dk); }
+.store-confirm {
+  width: 100%; padding: 12px; border: none;
+  background: var(--td-green-dk);
+  color: #fff; font-weight: 700; font-size: 14px;
+  border-radius: 10px; cursor: pointer; font-family: inherit;
+}
+.store-confirm:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* Store pill on home screen */
+.store-pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  margin: 10px auto 0; padding: 6px 12px 6px 14px;
+  background: var(--td-green-xl);
+  border: 1px solid var(--td-green-lt);
+  border-radius: 999px;
+  font-size: 12px; color: var(--td-green-dk);
+  font-weight: 600;
+  max-width: 90%;
+}
+.store-pill .store-pill-name { font-weight: 700; }
+.store-pill .store-pill-change {
+  font-size: 11px; color: var(--td-green-dk);
+  text-decoration: underline; cursor: pointer;
+  background: none; border: none; font-family: inherit;
+  padding: 0 2px;
+}
+
+/* Past weeks list */
+.pw-list { padding: 12px 16px 30px; }
+.pw-item {
+  background: #fff; border: 1px solid var(--td-grey-md);
+  border-radius: 10px; padding: 12px 14px; margin-bottom: 10px;
+  display: flex; align-items: center; justify-content: space-between;
+  cursor: pointer;
+}
+.pw-item:hover { border-color: var(--td-green-dk); }
+.pw-item-week { font-size: 14px; font-weight: 700; color: var(--td-ink); }
+.pw-item-dots { display: flex; gap: 4px; }
+.pw-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--td-grey-md); }
+.pw-dot.green { background: var(--go); }
+.pw-dot.amber { background: var(--amber); }
+.pw-dot.red   { background: var(--red); }
+.pw-empty { text-align: center; color: var(--td-ink-md); font-size: 13px; padding: 30px 20px; }
+.pw-loading { text-align: center; color: var(--td-ink-md); font-size: 13px; padding: 30px 20px; }
+
+.tl-action-btn.ghost {
+  background: transparent; color: var(--td-green-dk);
+  border: 1.5px solid var(--td-green-dk);
+}
+
+/* Admin screen */
+.admin-body { padding: 14px 12px 30px; }
+.admin-lock { padding: 40px 24px; text-align: center; }
+.admin-lock h2 { font-size: 18px; margin-bottom: 8px; color: var(--td-ink); }
+.admin-lock p { font-size: 13px; color: var(--td-ink-md); margin-bottom: 14px; }
+.admin-lock input {
+  width: 100%; max-width: 260px; padding: 10px 14px;
+  font-size: 14px; font-family: inherit;
+  border: 1.5px solid var(--td-grey-md);
+  border-radius: 10px; background: var(--td-grey-lt);
+  margin-bottom: 10px; text-align: center;
+}
+.admin-lock button {
+  padding: 10px 24px; border: none; background: var(--td-green-dk);
+  color: #fff; font-weight: 700; border-radius: 10px;
+  font-family: inherit; cursor: pointer;
+}
+.admin-table-wrap { overflow-x: auto; background: #fff; border: 1px solid var(--td-grey-md); border-radius: 10px; }
+.admin-table { border-collapse: collapse; width: 100%; font-size: 12px; }
+.admin-table th, .admin-table td {
+  padding: 8px 10px; text-align: center;
+  border-bottom: 1px solid var(--td-grey-lt);
+  white-space: nowrap;
+}
+.admin-table th {
+  background: var(--td-green-xl); font-weight: 700;
+  color: var(--td-green-dk); position: sticky; top: 0;
+  font-size: 11px; letter-spacing: 0.3px; text-transform: uppercase;
+}
+.admin-table td.admin-store { text-align: left; font-weight: 700; color: var(--td-ink); }
+.admin-table td.admin-miss { color: var(--td-grey); font-weight: 400; }
+.admin-cell-dots { display: inline-flex; gap: 2px; justify-content: center; }
+.admin-cell-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--td-grey-md); }
+.admin-cell-dot.green { background: var(--go); }
+.admin-cell-dot.amber { background: var(--amber); }
+.admin-cell-dot.red   { background: var(--red); }
+
+.admin-summary {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
+  margin-bottom: 14px;
+}
+.admin-summary-card {
+  background: #fff; border: 1px solid var(--td-grey-md);
+  border-radius: 10px; padding: 10px; text-align: center;
+}
+.admin-summary-val { font-size: 20px; font-weight: 800; }
+.admin-summary-val.green { color: var(--go); }
+.admin-summary-val.amber { color: var(--amber); }
+.admin-summary-val.red   { color: var(--red); }
+.admin-summary-lab {
+  font-size: 10px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.5px; color: var(--td-ink-md); margin-top: 2px;
+}
+.admin-section-title {
+  font-size: 12px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.5px; color: var(--td-ink-md);
+  margin: 18px 6px 8px;
+}
+.admin-status {
+  font-size: 12px; color: var(--td-ink-md);
+  padding: 20px; text-align: center;
+}
+.admin-error {
+  background: #fff2f0; border: 1px solid #ffcfc9; color: #8a2a1c;
+  border-radius: 8px; padding: 10px 12px; font-size: 12px;
+  margin: 10px 6px;
+}
+</style>
+</head>
+<body>
+
+<!-- ──────────────────────────────────────────────
+     SVG ICON LIBRARY (reused via <use>)
+────────────────────────────────────────────── -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="ic-script" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M6 3h9l4 4v14H6z"></path><path d="M15 3v4h4"></path><path d="M9 12h7M9 16h5"></path>
+    </symbol>
+    <symbol id="ic-os" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="3"></circle>
+      <path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"></path>
+    </symbol>
+    <symbol id="ic-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 12l5 5L20 6"></path>
+    </symbol>
+    <symbol id="ic-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="4"></circle>
+      <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>
+    </symbol>
+    <symbol id="ic-cal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="5" width="18" height="16" rx="1"></rect>
+      <path d="M3 9h18M8 3v4M16 3v4"></path>
+    </symbol>
+    <symbol id="ic-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6.1L12 16.8 6.6 19.6l1.2-6.1L3.3 9.3l6.1-.7z"></path>
+    </symbol>
+    <symbol id="ic-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 20V10M10 20V4M16 20v-8M22 20H2"></path>
+    </symbol>
+    <symbol id="ic-rotate" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 12a9 9 0 1 1-3-6.7"></path><path d="M21 4v5h-5"></path>
+    </symbol>
+  </defs>
+</svg>
+
+<div id="app">
+
+<!-- ══════════════════════════════════════════════
+     HOME SCREEN
+══════════════════════════════════════════════ -->
+<div class="screen active" id="screen-home">
+  <div class="scroll-content">
+    <div class="home-hero">
+      <div class="td-logo" aria-label="Tile Depot">
+        <span class="td-tile">TILE</span>
+        <span class="td-depot">DEPOT</span>
+      </div>
+      <div class="home-title">CREATE</div>
+      <div class="home-sub">Manager Toolkit &nbsp;·&nbsp; Every Shop. Every Time.</div>
+      <div class="store-pill" id="homeStorePill" style="display:none">
+        <span>Store:</span>
+        <span class="store-pill-name" id="homeStoreName">—</span>
+        <button class="store-pill-change" onclick="openStorePicker()">change</button>
+      </div>
+    </div>
+
+    <div class="home-tiles">
+      <div class="tile" onclick="showScreen('screen-script')">
+        <div class="tile-icon"><svg><use href="#ic-script"></use></svg></div>
+        <div class="tile-body">
+          <div class="tile-label">15-Minute Session</div>
+          <div class="tile-title">Launch Script</div>
+          <div class="tile-desc">Step-by-step script for the store launch session</div>
+        </div>
+        <div class="tile-arrow">›</div>
+      </div>
+
+      <div class="tile" onclick="showScreen('screen-os')">
+        <div class="tile-icon"><svg><use href="#ic-os"></use></svg></div>
+        <div class="tile-body">
+          <div class="tile-label">Daily &amp; Weekly</div>
+          <div class="tile-title">Operating System</div>
+          <div class="tile-desc">The rhythm that keeps CREATE alive in your store</div>
+        </div>
+        <div class="tile-arrow">›</div>
+      </div>
+
+      <div class="tile" onclick="showScreen('screen-tl')">
+        <div class="tile-icon"><svg><use href="#ic-check"></use></svg></div>
+        <div class="tile-body">
+          <div class="tile-label">Friday Check-In</div>
+          <div class="tile-title">Behaviour Check</div>
+          <div class="tile-desc">End-of-week traffic light assessment per CREATE step</div>
+        </div>
+        <div class="tile-arrow">›</div>
+      </div>
+    </div>
+
+    <div class="home-footer">
+      <p>Tap a tool to get started</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     LAUNCH SCRIPT
+══════════════════════════════════════════════ -->
+<div class="screen" id="screen-script">
+  <div class="topbar">
+    <div class="topbar-inner">
+      <button class="topbar-back" onclick="showScreen('screen-home')" aria-label="Back">‹</button>
+      <div class="topbar-title">
+        <div class="topbar-eyebrow">15-Minute Session</div>
+        <div class="topbar-heading">Launch Script</div>
+      </div>
+    </div>
+    <div class="td-rule"></div>
+  </div>
+  <div class="scroll-content">
+    <div class="script-list">
+
+      <!-- 1. Open -->
+      <div class="script-section open">
+        <div class="script-section-header" onclick="toggleScript(this)">
+          <div class="ss-num">1</div>
+          <div class="ss-meta">
+            <div class="ss-title">Open</div>
+            <div class="ss-time">0:00 — 0:45</div>
+          </div>
+          <div class="ss-chevron">⌄</div>
+        </div>
+        <div class="ss-body">
+          <div class="say-this">
+            <div class="say-label">Say This</div>
+            <div class="say-text">"You've all seen the trailer. You've all heard the presentation. You know what CREATE is. Today is different — today we make it real. No theory. No slides. Just the six things we do with every customer, every time."</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Six Non-Negotiables -->
+      <div class="script-section">
+        <div class="script-section-header" onclick="toggleScript(this)">
+          <div class="ss-num">2</div>
+          <div class="ss-meta">
+            <div class="ss-title">Six Non-Negotiables</div>
+            <div class="ss-time">0:45 — 2:45</div>
+          </div>
+          <div class="ss-chevron">⌄</div>
+        </div>
+        <div class="ss-body">
+          <div class="delivery-note">
+            <strong>Delivery Note</strong>
+            Walk through each one. Pause after each. Let them land.
+          </div>
+          <div class="nn-row">
+            <div class="nn-badge">C</div>
+            <div class="nn-content">
+              <div class="nn-step">Connect Quickly</div>
+              <div class="nn-phrase">"Welcome to Tile Depot!" — within 30 seconds, every customer.</div>
+            </div>
+          </div>
+          <div class="nn-row">
+            <div class="nn-badge">R</div>
+            <div class="nn-content">
+              <div class="nn-step">Really Listen</div>
+              <div class="nn-phrase">"Tell me about the project you're working on." — every engagement.</div>
+            </div>
+          </div>
+          <div class="nn-row">
+            <div class="nn-badge">E</div>
+            <div class="nn-content">
+              <div class="nn-step">Explain Simply</div>
+              <div class="nn-phrase">Always translate technical terms into plain benefit language.</div>
+            </div>
+          </div>
+          <div class="nn-row">
+            <div class="nn-badge">A</div>
+            <div class="nn-content">
+              <div class="nn-step">Add Value</div>
+              <div class="nn-phrase">All quotes must be generated using the website quote function.</div>
+            </div>
+          </div>
+          <div class="nn-row">
+            <div class="nn-badge">T</div>
+            <div class="nn-content">
+              <div class="nn-step">Take Responsibility</div>
+              <div class="nn-phrase">Full quote read-back — name, size, details, quantity, availability, guarantee.</div>
+            </div>
+          </div>
+          <div class="nn-row">
+            <div class="nn-badge">E</div>
+            <div class="nn-content">
+              <div class="nn-step">End Memorably</div>
+              <div class="nn-phrase">Always thank by name, reference their project, invite them back.</div>
+            </div>
+          </div>
+          <div style="height:12px;"></div>
+          <div class="say-this">
+            <div class="say-label">Say This</div>
+            <div class="say-text">"These are not six suggestions. They are the standard. Every customer. Every time. If you're ever unsure what to do next — come back to these."</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Why It Matters -->
+      <div class="script-section">
+        <div class="script-section-header" onclick="toggleScript(this)">
+          <div class="ss-num">3</div>
+          <div class="ss-meta">
+            <div class="ss-title">Why It Matters</div>
+            <div class="ss-time">2:45 — 3:30</div>
+          </div>
+          <div class="ss-chevron">⌄</div>
+        </div>
+        <div class="ss-body">
+          <div class="say-this">
+            <div class="say-label">Say This</div>
+            <div class="say-text">"Customers don't remember tile specs. They remember how they felt when they left. Confident. Cared for. Inspired. That's what CREATE delivers — and it's what sets us apart from every other tile store."</div>
+            <div class="say-text" style="margin-top:10px;">"Our competitors sell the same products. We sell a better experience. These six standards are how we prove it every single day."</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. Training Pathways -->
+      <div class="script-section">
+        <div class="script-section-header" onclick="toggleScript(this)">
+          <div class="ss-num">4</div>
+          <div class="ss-meta">
+            <div class="ss-title">Training Pathways</div>
+            <div class="ss-time">3:30 — 5:00</div>
+          </div>
+          <div class="ss-chevron">⌄</div>
+        </div>
+        <div class="ss-body">
+          <div class="pathway-grid">
+            <div class="pathway-card">
+              <h4>Training Portal</h4>
+              <ul>
+                <li>One module per CREATE step</li>
+                <li>Self-paced, online</li>
+                <li>Tracked across all stores</li>
+              </ul>
+            </div>
+            <div class="pathway-card">
+              <h4>Micro Installs</h4>
+              <ul>
+                <li>5-min weekly huddle</li>
+                <li>One behaviour per week</li>
+                <li>Cycles all six steps</li>
+              </ul>
+            </div>
+          </div>
+          <div class="say-this">
+            <div class="say-label">Say This</div>
+            <div class="say-text">"Today is the start, not the finish. You'll have Training Portal modules — one per CREATE step. And every week I'll run a five-minute micro install. One behaviour. One standard. Every week."</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. Choose Your Weapon -->
+      <div class="script-section">
+        <div class="script-section-header" onclick="toggleScript(this)">
+          <div class="ss-num">5</div>
+          <div class="ss-meta">
+            <div class="ss-title">Choose Your Weapon</div>
+            <div class="ss-time">5:00 — 9:00</div>
+          </div>
+          <div class="ss-chevron">⌄</div>
+        </div>
+        <div class="ss-body">
+          <div class="delivery-note">
+            <strong>Delivery Note</strong>
+            Read each option out. One sentence each. Team picks two. Don't push a preference.
+          </div>
+          <div class="weapon">
+            <div class="weapon-n">1</div>
+            <div>
+              <div class="weapon-nm">Shift Starter Card</div>
+              <div class="weapon-ds">Laminated card at the counter. Manager sets one CREATE behaviour as the weekly focus.</div>
+            </div>
+          </div>
+          <div class="weapon">
+            <div class="weapon-n">2</div>
+            <div>
+              <div class="weapon-nm">Floor Walk</div>
+              <div class="weapon-ds">5 minutes per shift. Catch one person doing CREATE well. Name it out loud.</div>
+            </div>
+          </div>
+          <div class="weapon">
+            <div class="weapon-n">3</div>
+            <div>
+              <div class="weapon-nm">Customer Story Debrief</div>
+              <div class="weapon-ds">One real customer story at end of shift. Manager maps it back to CREATE.</div>
+            </div>
+          </div>
+          <div class="weapon">
+            <div class="weapon-n">4</div>
+            <div>
+              <div class="weapon-nm">WhatsApp Nudge</div>
+              <div class="weapon-ds">One sentence to the group chat each morning. One behaviour. Ten seconds.</div>
+            </div>
+          </div>
+          <div class="weapon">
+            <div class="weapon-n">5</div>
+            <div>
+              <div class="weapon-nm">Scoreboard</div>
+              <div class="weapon-ds">Whiteboard tracking one CREATE metric per week. Visible to the whole team.</div>
+            </div>
+          </div>
+          <div style="height:12px;"></div>
+          <div class="say-this">
+            <div class="say-label">Say This</div>
+            <div class="say-text">"Which two feel right for us? You know your store."</div>
+            <div class="say-text" style="margin-top:8px;">"Good. We're doing [Option X] and [Option Y]. Starting this week. I'll run both."</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6. Set It Up -->
+      <div class="script-section">
+        <div class="script-section-header" onclick="toggleScript(this)">
+          <div class="ss-num">6</div>
+          <div class="ss-meta">
+            <div class="ss-title">Set It Up</div>
+            <div class="ss-time">9:00 — 13:00</div>
+          </div>
+          <div class="ss-chevron">⌄</div>
+        </div>
+        <div class="ss-body">
+          <div class="delivery-note">
+            <strong>Delivery Note</strong>
+            Both techniques activated before anyone leaves the room.
+          </div>
+          <div class="setup-item">
+            <div class="setup-label">Option 1 — Shift Starter Card</div>
+            <div class="setup-text">Place the Reference Card at the counter now. Announce today's focus behaviour.</div>
+          </div>
+          <div class="setup-item">
+            <div class="setup-label">Option 2 — Floor Walk</div>
+            <div class="setup-text">Set a phone reminder now. Commit to a time. Name this week's watch behaviour.</div>
+          </div>
+          <div class="setup-item">
+            <div class="setup-label">Option 3 — Customer Story Debrief</div>
+            <div class="setup-text">Nominate who goes first. Agree on when. Set it now.</div>
+          </div>
+          <div class="setup-item">
+            <div class="setup-label">Option 4 — WhatsApp Nudge</div>
+            <div class="setup-text">Open the group chat now. Send the first message before the session ends.</div>
+          </div>
+          <div class="setup-item">
+            <div class="setup-label">Option 5 — Scoreboard</div>
+            <div class="setup-text">Grab a marker. Write this week's metric on the whiteboard. Put it up now.</div>
+          </div>
+          <div style="height:12px;"></div>
+          <div class="say-this">
+            <div class="say-label">Say This</div>
+            <div class="say-text">"Both of these go live right now — not tomorrow, not next week. Before we close."</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 7. Close -->
+      <div class="script-section">
+        <div class="script-section-header" onclick="toggleScript(this)">
+          <div class="ss-num">7</div>
+          <div class="ss-meta">
+            <div class="ss-title">Close</div>
+            <div class="ss-time">13:00 — 15:00</div>
+          </div>
+          <div class="ss-chevron">⌄</div>
+        </div>
+        <div class="ss-body">
+          <div class="say-this">
+            <div class="say-label">Say This</div>
+            <div class="say-text">"We've got six non-negotiables. We've chosen two ways to keep them alive. That's all CREATE needs — consistency and visibility."</div>
+            <div class="say-text" style="margin-top:8px;">"One last question: which CREATE standard, if you nailed it every single time, would make the biggest difference to your customers?"</div>
+            <div class="say-text" style="margin-top:8px;">"Your next customer is your first rep. Let's go."</div>
+          </div>
+          <div class="delivery-note" style="margin-top:10px;">
+            <strong>Hand Out</strong>
+            Distribute Reference Cards now. One per person.
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end script-list -->
+
+    <div class="complete-card">
+      <span class="accent">Session Complete</span>
+      <h3>Every Shop. Every Customer. Every Time.</h3>
+      <p style="margin-top:10px;">Daily question: <em>Which CREATE behaviour did I reinforce today?</em></p>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     OPERATING SYSTEM
+══════════════════════════════════════════════ -->
+<div class="screen" id="screen-os">
+  <div class="topbar">
+    <div class="topbar-inner">
+      <button class="topbar-back" onclick="showScreen('screen-home')" aria-label="Back">‹</button>
+      <div class="topbar-title">
+        <div class="topbar-eyebrow">Daily &amp; Weekly</div>
+        <div class="topbar-heading">Operating System</div>
+      </div>
+    </div>
+    <div class="td-rule"></div>
+  </div>
+  <div class="scroll-content">
+    <div class="os-content">
+
+      <div class="daily-q-card">
+        <div class="daily-q-label">Ask Yourself Every Shift</div>
+        <div class="daily-q-text">Which CREATE behaviour did I reinforce today?</div>
+      </div>
+
+      <div class="os-card">
+        <div class="os-card-header">
+          <div class="os-card-icon"><svg><use href="#ic-sun"></use></svg></div>
+          <div>
+            <div class="os-card-title">Every Shift</div>
+            <div class="os-card-sub">Daily non-negotiables</div>
+          </div>
+        </div>
+        <div class="os-card-body">
+          <div class="os-row">
+            <div class="os-dot"></div>
+            <div class="os-row-text">Run your chosen <strong>reinforcement technique</strong> — Shift Starter Card, Floor Walk, WhatsApp Nudge, Story Debrief, or Scoreboard.</div>
+          </div>
+          <div class="os-row">
+            <div class="os-dot"></div>
+            <div class="os-row-text"><strong>Catch one person</strong> doing CREATE well. Name it out loud in front of the team.</div>
+          </div>
+          <div class="os-row">
+            <div class="os-dot"></div>
+            <div class="os-row-text">If you hear a wrong phrase — <strong>correct it calmly and immediately.</strong> Reset to the standard.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="os-card">
+        <div class="os-card-header">
+          <div class="os-card-icon"><svg><use href="#ic-cal"></use></svg></div>
+          <div>
+            <div class="os-card-title">Every Tuesday</div>
+            <div class="os-card-sub">Micro Install — 5 min</div>
+          </div>
+        </div>
+        <div class="os-card-body">
+          <div class="os-row">
+            <div class="os-dot"></div>
+            <div class="os-row-text">Name the <strong>one CREATE behaviour</strong> you're focusing on this week.</div>
+          </div>
+          <div class="os-row">
+            <div class="os-dot"></div>
+            <div class="os-row-text">Demonstrate <strong>bad vs best</strong> — 60 seconds, no roleplay required.</div>
+          </div>
+          <div class="os-row">
+            <div class="os-dot"></div>
+            <div class="os-row-text">Have each person <strong>say the phrase out loud once.</strong> That's the install.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="os-card">
+        <div class="os-card-header">
+          <div class="os-card-icon"><svg><use href="#ic-star"></use></svg></div>
+          <div>
+            <div class="os-card-title">Every Friday</div>
+            <div class="os-card-sub">Recognition + check</div>
+          </div>
+        </div>
+        <div class="os-card-body">
+          <div class="os-row">
+            <div class="os-dot"></div>
+            <div class="os-row-text">Call out <strong>one CREATE win</strong> publicly — specific behaviour, specific person.</div>
+          </div>
+          <div class="os-row">
+            <div class="os-dot"></div>
+            <div class="os-row-text">Complete the <strong>Traffic Light Behaviour Check</strong> for the week.</div>
+          </div>
+          <div class="os-row">
+            <div class="os-dot"></div>
+            <div class="os-row-text">Identify the <strong>lowest-scoring letter</strong> — that's next week's focus.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="os-card">
+        <div class="os-card-header">
+          <div class="os-card-icon"><svg><use href="#ic-rotate"></use></svg></div>
+          <div>
+            <div class="os-card-title">6-Week Rotation</div>
+            <div class="os-card-sub">One CREATE step per week</div>
+          </div>
+        </div>
+        <div class="os-card-body">
+          <div class="os-row"><div class="os-dot"></div><div class="os-row-text"><strong>Week 1</strong> — Connect Quickly: "Welcome to Tile Depot!"</div></div>
+          <div class="os-row"><div class="os-dot"></div><div class="os-row-text"><strong>Week 2</strong> — Really Listen: "Tell me about the project..."</div></div>
+          <div class="os-row"><div class="os-dot"></div><div class="os-row-text"><strong>Week 3</strong> — Explain Simply: feature → benefit translation</div></div>
+          <div class="os-row"><div class="os-dot"></div><div class="os-row-text"><strong>Week 4</strong> — Add Value: website quote function + project thinking</div></div>
+          <div class="os-row"><div class="os-dot"></div><div class="os-row-text"><strong>Week 5</strong> — Take Responsibility: full quote read-back</div></div>
+          <div class="os-row"><div class="os-dot"></div><div class="os-row-text"><strong>Week 6</strong> — End Memorably: name + project + invitation</div></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     TRAFFIC LIGHT CHECK
+══════════════════════════════════════════════ -->
+<div class="screen" id="screen-tl">
+  <div class="topbar">
+    <div class="topbar-inner">
+      <button class="topbar-back" onclick="showScreen('screen-home')" aria-label="Back">‹</button>
+      <div class="topbar-title">
+        <div class="topbar-eyebrow">Friday Check-In</div>
+        <div class="topbar-heading">Behaviour Check</div>
+      </div>
+    </div>
+    <div class="td-rule"></div>
+  </div>
+  <div class="scroll-content">
+    <div class="tl-content">
+
+      <div class="week-display">
+        <div class="week-label">Week of</div>
+        <div class="week-value" id="weekDisplay"></div>
+      </div>
+
+      <div class="tl-intro">
+        <p>Rate each CREATE step based on what you observed across the whole team this week. <strong>Green</strong> = consistent. <strong>Amber</strong> = developing. <strong>Red</strong> = needs focus next week.</p>
+      </div>
+
+      <!-- C -->
+      <div class="tl-letter-card">
+        <div class="tl-letter-header">
+          <div class="tl-badge">C</div>
+          <div>
+            <div class="tl-step-name">Connect Quickly</div>
+            <div class="tl-nn">"Welcome to Tile Depot!" — within 30 seconds</div>
+          </div>
+        </div>
+        <div class="tl-rating-row">
+          <div class="tl-rating-label">This Week's Rating</div>
+          <div class="tl-buttons">
+            <button class="tl-btn green" onclick="setRating('C','green',this)">Green</button>
+            <button class="tl-btn amber" onclick="setRating('C','amber',this)">Amber</button>
+            <button class="tl-btn red" onclick="setRating('C','red',this)">Red</button>
+          </div>
+        </div>
+        <div class="tl-behaviours">
+          <div class="tl-beh-label">Observed Behaviours</div>
+          <div class="tl-beh-item">
+            <div class="tl-check" onclick="toggleCheck(this)">✓</div>
+            <div class="tl-beh-text">Customers acknowledged within 30 seconds</div>
+          </div>
+          <div class="tl-beh-item">
+            <div class="tl-check" onclick="toggleCheck(this)">✓</div>
+            <div class="tl-beh-text">Exact phrase "Welcome to Tile Depot!" used</div>
+          </div>
+          <div class="tl-beh-item">
+            <div class="tl-check" onclick="toggleCheck(this)">✓</div>
+            <div class="tl-beh-text">Open body language and eye contact on approach</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- R -->
+      <div class="tl-letter-card">
+        <div class="tl-letter-header">
+          <div class="tl-badge">R</div>
+          <div>
+            <div class="tl-step-name">Really Listen</div>
+            <div class="tl-nn">"Tell me about the project you're working on."</div>
+          </div>
+        </div>
+        <div class="tl-rating-row">
+          <div class="tl-rating-label">This Week's Rating</div>
+          <div class="tl-buttons">
+            <button class="tl-btn green" onclick="setRating('R','green',this)">Green</button>
+            <button class="tl-btn amber" onclick="setRating('R','amber',this)">Amber</button>
+            <button class="tl-btn red" onclick="setRating('R','red',this)">Red</button>
+          </div>
+        </div>
+        <div class="tl-behaviours">
+          <div class="tl-beh-label">Observed Behaviours</div>
+          <div class="tl-beh-item">
+            <div class="tl-check" onclick="toggleCheck(this)">✓</div>
+            <div class="tl-beh-text">Discovery question used before recommending</div>
+          </div>
+          <div class="tl-beh-item">
+            <div class="tl-check" onclick="toggleCheck(this)">✓</div>
+            <div class="tl-beh-text">Customer allowed to speak without interruption</div>
+          </div>
+          <div class="tl-beh-item">
+            <div class="tl-check" onclick="toggleCheck(this)">✓</div>
+            <div class="tl-beh-text">Understanding confirmed before moving to products</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- E1 -->
+      <div class="tl-letter-card">
+        <div class="tl-letter-header">
+          <div class="tl-badge">E</div>
+          <div>
+            <div class="tl-step-name">Explain Simply</div>
+            <div class="tl-nn">Technical terms translated into plain benefit language</div>
+          </div>
+        </div>
+        <div class="tl-rating-row">
+          <div class="tl-rating-label">This Week's Rating</div>
+          <div class="tl-buttons">
+            <button class="tl-btn green" onclick="setRating('E1','green',this)">Green</button>
+            <button class="tl-btn amber" onclick="setRating('E1','amber',this)">Amber</button>
+            <button class="tl-btn red" onclick="setRating('E1','red',this)">Red</button>
+          </div>
+        </div>
+        <div class="tl-behaviours">
+          <div class="tl-beh-label">Observed Behaviours</div>
+          <div class="tl-beh-item">
+            <div class="tl-check" onclick="toggleCheck(this)">✓</div>
+            <div class="tl-beh-text">No unexplained jargon used with customers</div>
+          </div>
+          <div class="tl-beh-item">
+            <div class="tl-check" onclick="toggleCheck(this)">✓</div>
+            <div class="tl-beh-text">Features explained in terms of customer benefit</div>
+          </div>
+          <div class="tl-beh-item">
+            <div class="tl-check" onclick="toggleCheck(this)">✓</div>
+            <div class="tl-beh-text">Customer visibly understood before moving on</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- A -->
+      <div class="tl-letter-card">
+        <div class="tl-letter-header">
+          <div class="tl-badge">A</div>
+          <div>
+            <div class="tl-step-name">Add Value</div>
+            <div class="tl-nn">All quotes via the website quote function</div>
+          </div>
+        </div>
+        <div class="tl-rating-row">
+          <div class="tl-rating-label">This Week's Rating</div>
+          <div class="tl-buttons">
+            <button class="tl-btn green" onclick="setRating('A','green',this)">Green</button>
+            <button class="tl-btn amber" onclick="setRating('A','amber',this)">Amber</button>
+            <button class="tl-btn red" onclick="setRating('A','red',this)">Red</button>
+          </div>
+        </div>
+        <div class="tl-behaviours">
+          <div class="tl-beh-label">Observed Behaviours</div>
+          <div class="tl-beh-item">
+            <div class="tl-check" onclick="toggleCheck(this)">✓</div>
+            <div class="tl-beh-text">Website quote function used for all quotes</div>
+          </div>
+          <div class="tl-beh-item">
+            <div class="tl-check" onclick="toggleCheck(this)">✓</div>
+            <div class="tl-beh-text">Full project scope explored — not just tiles</div>
+          </div>
+          <div class="tl-beh-item">
+            <div class="tl-check" onclick="toggleCheck(this)">✓</div>
+            <div class="tl-beh-text">Complementary products suggested where relevant</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- T -->
+      <div class="tl-letter-card">
+        <div class="tl-letter-header">
+          <div class="tl-badge">T</div>
+          <div>
+            <div class="tl-step-name">Take Responsibility</div>
+            <div class="tl-nn">Full quote read-back — every time</div>
+          </div>
+        </div>
+        <div class="tl-rating-row">
+          <div class="tl-rating-label">This Week's Rating</div>
+          <div class="tl-buttons">
+            <button class="tl-btn green" onclick="setRating('T','green',this)">Green</button>
+            <button class="tl-btn amber" onclick="setRating('T','amber',this)">Amber</button>
+            <button class="tl-btn red" onclick="setRating('T','red',this)">Red</button>
+          </div>
+        </div>
+        <div class="tl-behaviours">
+          <div class="tl-beh-label">Observed Behaviours</div>
+          <div class="tl-beh-item">
+            <div class="tl-check" onclick="toggleCheck(this)">✓</div>
+            <div class="tl-beh-text">Full read-back completed: name, size, quantity, availability, guarantee</div>
+          </div>
+          <div class="tl-beh-item">
+            <div class="tl-check" onclick="toggleCheck(this)">✓</div>
+            <div class="tl-beh-text">Issues owned personally — not passed to manager</div>
+          </div>
+          <div class="tl-beh-item">
+            <div class="tl-check" onclick="toggleCheck(this)">✓</div>
+            <div class="tl-beh-text">Returns and guarantee mentioned on every quote</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- E2 -->
+      <div class="tl-letter-card">
+        <div class="tl-letter-header">
+          <div class="tl-badge">E</div>
+          <div>
+            <div class="tl-step-name">End Memorably</div>
+            <div class="tl-nn">Thank by name, reference project, invite back</div>
+          </div>
+        </div>
+        <div class="tl-rating-row">
+          <div class="tl-rating-label">This Week's Rating</div>
+          <div class="tl-buttons">
+            <button class="tl-btn green" onclick="setRating('E2','green',this)">Green</button>
+            <button class="tl-btn amber" onclick="setRating('E2','amber',this)">Amber</button>
+            <button class="tl-btn red" onclick="setRating('E2','red',this)">Red</button>
+          </div>
+        </div>
+        <div class="tl-behaviours">
+          <div class="tl-beh-label">Observed Behaviours</div>
+          <div class="tl-beh-item">
+            <div class="tl-check" onclick="toggleCheck(this)">✓</div>
+            <div class="tl-beh-text">Customer thanked by name where known</div>
+          </div>
+          <div class="tl-beh-item">
+            <div class="tl-check" onclick="toggleCheck(this)">✓</div>
+            <div class="tl-beh-text">Specific project referenced in the farewell</div>
+          </div>
+          <div class="tl-beh-item">
+            <div class="tl-check" onclick="toggleCheck(this)">✓</div>
+            <div class="tl-beh-text">Invitation to return or follow-up included</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Summary -->
+      <div class="tl-summary">
+        <div class="tl-summary-header">
+          <h3>Weekly Summary</h3>
+        </div>
+        <div class="tl-summary-body" id="summaryBody">
+          <div class="tl-summary-row"><div class="tl-summary-step">C — Connect Quickly</div><div class="tl-summary-dot" id="sum-C">–</div></div>
+          <div class="tl-summary-row"><div class="tl-summary-step">R — Really Listen</div><div class="tl-summary-dot" id="sum-R">–</div></div>
+          <div class="tl-summary-row"><div class="tl-summary-step">E — Explain Simply</div><div class="tl-summary-dot" id="sum-E1">–</div></div>
+          <div class="tl-summary-row"><div class="tl-summary-step">A — Add Value</div><div class="tl-summary-dot" id="sum-A">–</div></div>
+          <div class="tl-summary-row"><div class="tl-summary-step">T — Take Responsibility</div><div class="tl-summary-dot" id="sum-T">–</div></div>
+          <div class="tl-summary-row"><div class="tl-summary-step">E — End Memorably</div><div class="tl-summary-dot" id="sum-E2">–</div></div>
+        </div>
+        <div class="tl-actions">
+          <button class="tl-action-btn secondary" onclick="resetCheck()">Reset</button>
+          <button class="tl-action-btn primary" onclick="saveCheck()">Save Week</button>
+        </div>
+        <div class="tl-actions" style="margin-top:10px">
+          <button class="tl-action-btn ghost" style="width:100%" onclick="showPastWeeks()">View Past Weeks</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     PAST WEEKS (per store)
+══════════════════════════════════════════════ -->
+<div class="screen" id="screen-past">
+  <div class="topbar">
+    <div class="topbar-inner">
+      <button class="topbar-back" onclick="showScreen('screen-tl')" aria-label="Back">‹</button>
+      <div class="topbar-title">
+        <div class="topbar-eyebrow" id="pastEyebrow">Past Weeks</div>
+        <div class="topbar-heading">History</div>
+      </div>
+    </div>
+    <div class="td-rule"></div>
+  </div>
+  <div class="scroll-content">
+    <div class="pw-list" id="pwList">
+      <div class="pw-loading">Loading…</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     ADMIN DASHBOARD (all stores)
+══════════════════════════════════════════════ -->
+<div class="screen" id="screen-admin">
+  <div class="topbar">
+    <div class="topbar-inner">
+      <button class="topbar-back" onclick="showScreen('screen-home')" aria-label="Back">‹</button>
+      <div class="topbar-title">
+        <div class="topbar-eyebrow">All Stores</div>
+        <div class="topbar-heading">Admin Dashboard</div>
+      </div>
+    </div>
+    <div class="td-rule"></div>
+  </div>
+  <div class="scroll-content">
+    <div id="adminLock" class="admin-lock">
+      <h2>Admin Access</h2>
+      <p>Enter the admin password to view all store results.</p>
+      <input type="password" id="adminPwd" placeholder="Password" autocomplete="off">
+      <br>
+      <button onclick="tryAdminLogin()">Unlock</button>
+      <div id="adminLockErr" style="color:var(--red);font-size:12px;margin-top:8px;display:none">Wrong password.</div>
+    </div>
+    <div id="adminBody" class="admin-body" style="display:none">
+      <div class="admin-status" id="adminStatus">Loading results…</div>
+    </div>
+  </div>
+</div>
+
+</div><!-- end #app -->
+
+<!-- Store picker overlay -->
+<div class="store-overlay" id="storeOverlay">
+  <div class="store-card">
+    <h2>Select your store</h2>
+    <p>Pick once — we'll remember this store on this device.</p>
+    <select class="store-select" id="storeSelect">
+      <option value="">— Select store —</option>
+    </select>
+    <button class="store-confirm" id="storeConfirm" disabled onclick="confirmStore()">Continue</button>
+  </div>
+</div>
+
+<div class="save-flash" id="saveFlash">✓ Saved for this week</div>
+
+<script>
+// ══════════════════════════════════════════════════════
+// CONFIG — paste your deployed Apps Script URL here
+// ══════════════════════════════════════════════════════
+var APPS_SCRIPT_URL = 'PASTE_YOUR_DEPLOYED_WEB_APP_URL_HERE';
+var ADMIN_PASSWORD  = 'tiledepot2026';
+
+var STORES = [
+  'Whangarei','Albany','Rosebank','Lunn Ave','Manukau',
+  'Hamilton','Tauranga','Rotorua','New Plymouth','Napier',
+  'Lower Hutt','Palmerston North','Queenstown'
+];
+
+var STEPS = [
+  { key:'C',  label:'C — Connect Quickly' },
+  { key:'R',  label:'R — Really Listen' },
+  { key:'E1', label:'E — Explain Simply' },
+  { key:'A',  label:'A — Add Value' },
+  { key:'T',  label:'T — Take Responsibility' },
+  { key:'E2', label:'E — End Memorably' }
+];
+
+// ── SCREEN NAVIGATION ───────────────────────────────
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(function(s) {
+    s.classList.remove('active');
+  });
+  document.getElementById(id).classList.add('active');
+  var sc = document.querySelector('#' + id + ' .scroll-content');
+  if (sc) sc.scrollTop = 0;
+}
+
+// ── LAUNCH SCRIPT ACCORDIONS ────────────────────────
+function toggleScript(header) {
+  var section = header.parentElement;
+  section.classList.toggle('open');
+}
+
+// ── TRAFFIC LIGHT RATINGS ────────────────────────────
+var ratings = {};
+
+function setRating(letter, colour, btn) {
+  var btns = btn.parentElement.querySelectorAll('.tl-btn');
+  btns.forEach(function(b) { b.classList.remove('selected'); });
+  btn.classList.add('selected');
+  ratings[letter] = colour;
+  updateSummary();
+}
+
+function toggleCheck(el) {
+  el.classList.toggle('checked');
+}
+
+function updateSummary() {
+  var keys = ['C','R','E1','A','T','E2'];
+  keys.forEach(function(k) {
+    var dot = document.getElementById('sum-' + k);
+    if (dot) {
+      var r = ratings[k];
+      dot.className = 'tl-summary-dot' + (r ? ' ' + r : '');
+      dot.textContent = r === 'green' ? '●' : r === 'amber' ? '●' : r === 'red' ? '●' : '–';
+    }
+  });
+}
+
+// Collect all checked behaviour observations, grouped by letter
+function collectObservations() {
+  var out = {};
+  document.querySelectorAll('#screen-tl .tl-letter-card').forEach(function(card) {
+    var badge = card.querySelector('.tl-badge');
+    var letter = badge ? badge.textContent.trim() : '';
+    // disambiguate E — use rating key by looking at the setRating onclick in the first tl-btn
+    var firstBtn = card.querySelector('.tl-btn');
+    var m = firstBtn && firstBtn.getAttribute('onclick').match(/setRating\('([^']+)'/);
+    var key = m ? m[1] : letter;
+    var items = [];
+    card.querySelectorAll('.tl-beh-item').forEach(function(it) {
+      var check = it.querySelector('.tl-check');
+      if (check && check.classList.contains('checked')) {
+        var txt = it.querySelector('.tl-beh-text');
+        items.push(txt ? txt.textContent.trim() : '');
+      }
+    });
+    out[key] = items;
+  });
+  return out;
+}
+
+function saveCheck() {
+  var store = getStore();
+  if (!store) { openStorePicker(); return; }
+  var weekOf = getWeekOf();
+  var payload = {
+    action: 'save',
+    store: store,
+    weekOf: weekOf,
+    ratings: ratings,
+    observations: collectObservations(),
+    submittedAt: new Date().toISOString()
+  };
+  if (!APPS_SCRIPT_URL || APPS_SCRIPT_URL.indexOf('PASTE_') === 0) {
+    showFlash('⚠ Backend not configured — see setup instructions');
+    return;
+  }
+  showFlash('Saving…');
+  fetch(APPS_SCRIPT_URL, {
+    method: 'POST',
+    // text/plain avoids CORS preflight on Apps Script web apps
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    body: JSON.stringify(payload)
+  }).then(function(r) { return r.json(); })
+    .then(function(res) {
+      if (res && res.ok) showFlash('✓ Saved to ' + store);
+      else showFlash('⚠ Save failed: ' + (res && res.error ? res.error : 'unknown'));
+    })
+    .catch(function(err) { showFlash('⚠ Network error — try again'); });
+}
+
+function showFlash(msg) {
+  var flash = document.getElementById('saveFlash');
+  flash.textContent = msg;
+  flash.classList.add('show');
+  clearTimeout(window._flashTimer);
+  window._flashTimer = setTimeout(function() { flash.classList.remove('show'); }, 2200);
+}
+
+function resetCheck() {
+  ratings = {};
+  document.querySelectorAll('.tl-btn').forEach(function(b) { b.classList.remove('selected'); });
+  document.querySelectorAll('.tl-check').forEach(function(c) { c.classList.remove('checked'); });
+  updateSummary();
+}
+
+// Apply a loaded entry (from history) into the form
+function applyEntry(entry) {
+  resetCheck();
+  if (entry.ratings) {
+    Object.keys(entry.ratings).forEach(function(key) {
+      var colour = entry.ratings[key];
+      // find button where setRating('key','colour',...)
+      var btn = document.querySelector("#screen-tl .tl-btn." + colour + "[onclick*=\"setRating('" + key + "'\"]");
+      if (btn) {
+        var siblings = btn.parentElement.querySelectorAll('.tl-btn');
+        siblings.forEach(function(b) { b.classList.remove('selected'); });
+        btn.classList.add('selected');
+        ratings[key] = colour;
+      }
+    });
+  }
+  if (entry.observations) {
+    Object.keys(entry.observations).forEach(function(key) {
+      var obs = entry.observations[key] || [];
+      // find card by matching its first button's onclick
+      var cards = document.querySelectorAll('#screen-tl .tl-letter-card');
+      cards.forEach(function(card) {
+        var firstBtn = card.querySelector('.tl-btn');
+        var m = firstBtn && firstBtn.getAttribute('onclick').match(/setRating\('([^']+)'/);
+        if (m && m[1] === key) {
+          card.querySelectorAll('.tl-beh-item').forEach(function(it) {
+            var txt = it.querySelector('.tl-beh-text');
+            var check = it.querySelector('.tl-check');
+            if (check && txt && obs.indexOf(txt.textContent.trim()) !== -1) {
+              check.classList.add('checked');
+            }
+          });
+        }
+      });
+    });
+  }
+  updateSummary();
+}
+
+// ── WEEK DISPLAY ─────────────────────────────────────
+function getWeekOf() {
+  var now = new Date();
+  var day = now.getDay();
+  var diff = now.getDate() - day + (day === 0 ? -6 : 1);
+  var monday = new Date(now.setDate(diff));
+  // ISO date (YYYY-MM-DD) for the Monday of this week — stable key for storage
+  var y = monday.getFullYear();
+  var m = String(monday.getMonth()+1).padStart(2,'0');
+  var d = String(monday.getDate()).padStart(2,'0');
+  return y + '-' + m + '-' + d;
+}
+function formatWeekForDisplay(isoMonday) {
+  try {
+    var dt = new Date(isoMonday + 'T00:00:00');
+    return dt.toLocaleDateString('en-NZ', { day:'numeric', month:'short', year:'numeric' });
+  } catch(e) { return isoMonday; }
+}
+
+document.getElementById('weekDisplay').textContent = formatWeekForDisplay(getWeekOf());
+
+// ── STORE PICKER ─────────────────────────────────────
+function getStore() {
+  try { return localStorage.getItem('create_store') || ''; } catch(e) { return ''; }
+}
+function setStore(s) {
+  try { localStorage.setItem('create_store', s); } catch(e) {}
+  renderStorePill();
+}
+function renderStorePill() {
+  var s = getStore();
+  var pill = document.getElementById('homeStorePill');
+  var name = document.getElementById('homeStoreName');
+  if (s) {
+    pill.style.display = 'inline-flex';
+    name.textContent = s;
+  } else {
+    pill.style.display = 'none';
+  }
+}
+function openStorePicker() {
+  var sel = document.getElementById('storeSelect');
+  sel.innerHTML = '<option value="">— Select store —</option>';
+  STORES.forEach(function(s) {
+    var o = document.createElement('option');
+    o.value = s; o.textContent = s;
+    sel.appendChild(o);
+  });
+  sel.value = getStore() || '';
+  document.getElementById('storeConfirm').disabled = !sel.value;
+  sel.onchange = function() {
+    document.getElementById('storeConfirm').disabled = !sel.value;
+  };
+  document.getElementById('storeOverlay').classList.add('show');
+}
+function confirmStore() {
+  var v = document.getElementById('storeSelect').value;
+  if (!v) return;
+  setStore(v);
+  document.getElementById('storeOverlay').classList.remove('show');
+}
+
+// ── PAST WEEKS (per store) ───────────────────────────
+function showPastWeeks() {
+  var store = getStore();
+  if (!store) { openStorePicker(); return; }
+  document.getElementById('pastEyebrow').textContent = store;
+  showScreen('screen-past');
+  var list = document.getElementById('pwList');
+  list.innerHTML = '<div class="pw-loading">Loading past weeks…</div>';
+  if (!APPS_SCRIPT_URL || APPS_SCRIPT_URL.indexOf('PASTE_') === 0) {
+    list.innerHTML = '<div class="pw-empty">⚠ Backend not configured. Once the Apps Script URL is pasted into this file, past weeks will appear here.</div>';
+    return;
+  }
+  fetch(APPS_SCRIPT_URL + '?action=list&store=' + encodeURIComponent(store))
+    .then(function(r) { return r.json(); })
+    .then(function(res) {
+      if (!res.ok) { list.innerHTML = '<div class="pw-empty">Error: ' + (res.error || 'unknown') + '</div>'; return; }
+      var entries = res.entries || [];
+      if (entries.length === 0) { list.innerHTML = '<div class="pw-empty">No saved weeks yet for ' + store + '.</div>'; return; }
+      // sort newest first
+      entries.sort(function(a,b) { return (b.weekOf || '').localeCompare(a.weekOf || ''); });
+      list.innerHTML = '';
+      entries.forEach(function(e) {
+        var item = document.createElement('div');
+        item.className = 'pw-item';
+        var dots = '';
+        STEPS.forEach(function(s) {
+          var r = (e.ratings || {})[s.key] || '';
+          dots += '<span class="pw-dot ' + r + '" title="' + s.label + ' ' + (r || 'none') + '"></span>';
+        });
+        item.innerHTML = '<div class="pw-item-week">Week of ' + formatWeekForDisplay(e.weekOf) + '</div>'
+                      + '<div class="pw-item-dots">' + dots + '</div>';
+        item.onclick = function() {
+          applyEntry(e);
+          showScreen('screen-tl');
+          showFlash('Loaded week ' + formatWeekForDisplay(e.weekOf));
+        };
+        list.appendChild(item);
+      });
+    })
+    .catch(function() { list.innerHTML = '<div class="pw-empty">Network error — try again.</div>'; });
+}
+
+// ── ADMIN DASHBOARD ──────────────────────────────────
+function tryAdminLogin() {
+  var pwd = document.getElementById('adminPwd').value;
+  if (pwd === ADMIN_PASSWORD) {
+    document.getElementById('adminLock').style.display = 'none';
+    document.getElementById('adminBody').style.display = 'block';
+    try { sessionStorage.setItem('create_admin','1'); } catch(e) {}
+    loadAdminData();
+  } else {
+    document.getElementById('adminLockErr').style.display = 'block';
+  }
+}
+
+function openAdmin() {
+  showScreen('screen-admin');
+  var unlocked = false;
+  try { unlocked = sessionStorage.getItem('create_admin') === '1'; } catch(e) {}
+  if (unlocked) {
+    document.getElementById('adminLock').style.display = 'none';
+    document.getElementById('adminBody').style.display = 'block';
+    loadAdminData();
+  } else {
+    document.getElementById('adminLock').style.display = 'block';
+    document.getElementById('adminBody').style.display = 'none';
+    document.getElementById('adminLockErr').style.display = 'none';
+    document.getElementById('adminPwd').value = '';
+    setTimeout(function() { document.getElementById('adminPwd').focus(); }, 200);
+  }
+}
+
+function loadAdminData() {
+  var body = document.getElementById('adminBody');
+  var status = document.getElementById('adminStatus');
+  status.textContent = 'Loading results from Google Sheet…';
+  body.innerHTML = '';
+  body.appendChild(status);
+  if (!APPS_SCRIPT_URL || APPS_SCRIPT_URL.indexOf('PASTE_') === 0) {
+    status.textContent = '';
+    var err = document.createElement('div');
+    err.className = 'admin-error';
+    err.textContent = 'Backend not configured. Paste your deployed Apps Script URL into APPS_SCRIPT_URL at the top of the <script> block in this HTML file.';
+    body.appendChild(err);
+    return;
+  }
+  fetch(APPS_SCRIPT_URL + '?action=all&password=' + encodeURIComponent(ADMIN_PASSWORD))
+    .then(function(r) { return r.json(); })
+    .then(function(res) {
+      if (!res.ok) { status.textContent = 'Error: ' + (res.error || 'unknown'); return; }
+      renderAdmin(res.entries || []);
+    })
+    .catch(function() { status.textContent = 'Network error — try again.'; });
+}
+
+function renderAdmin(entries) {
+  var body = document.getElementById('adminBody');
+  body.innerHTML = '';
+  if (entries.length === 0) {
+    var empty = document.createElement('div');
+    empty.className = 'admin-status';
+    empty.textContent = 'No weekly check-ins saved yet.';
+    body.appendChild(empty);
+    return;
+  }
+
+  // Summary of most recent entry per store
+  var byStore = {};
+  entries.forEach(function(e) {
+    if (!byStore[e.store]) byStore[e.store] = [];
+    byStore[e.store].push(e);
+  });
+  Object.keys(byStore).forEach(function(s) {
+    byStore[s].sort(function(a,b) { return (b.weekOf || '').localeCompare(a.weekOf || ''); });
+  });
+
+  // Count traffic lights across most-recent week per store
+  var counts = { green:0, amber:0, red:0 };
+  STORES.forEach(function(s) {
+    var latest = byStore[s] && byStore[s][0];
+    if (!latest) return;
+    STEPS.forEach(function(st) {
+      var v = (latest.ratings || {})[st.key];
+      if (v && counts[v] !== undefined) counts[v]++;
+    });
+  });
+
+  var sum = document.createElement('div');
+  sum.className = 'admin-summary';
+  sum.innerHTML =
+    '<div class="admin-summary-card"><div class="admin-summary-val green">' + counts.green + '</div><div class="admin-summary-lab">Green</div></div>' +
+    '<div class="admin-summary-card"><div class="admin-summary-val amber">' + counts.amber + '</div><div class="admin-summary-lab">Amber</div></div>' +
+    '<div class="admin-summary-card"><div class="admin-summary-val red">' + counts.red + '</div><div class="admin-summary-lab">Red</div></div>';
+  body.appendChild(sum);
+
+  // Find the most recent 6 weeks across all stores
+  var allWeeks = {};
+  entries.forEach(function(e) { if (e.weekOf) allWeeks[e.weekOf] = true; });
+  var weeks = Object.keys(allWeeks).sort().reverse().slice(0,6);
+  weeks.reverse(); // oldest → newest for reading left-to-right
+
+  var t1 = document.createElement('div');
+  t1.className = 'admin-section-title';
+  t1.textContent = 'Weekly Ratings — Last ' + weeks.length + ' weeks';
+  body.appendChild(t1);
+
+  var wrap = document.createElement('div');
+  wrap.className = 'admin-table-wrap';
+  var tbl = document.createElement('table');
+  tbl.className = 'admin-table';
+  var head = '<tr><th style="text-align:left">Store</th>';
+  weeks.forEach(function(w) { head += '<th>' + formatWeekForDisplay(w) + '</th>'; });
+  head += '</tr>';
+  tbl.innerHTML = '<thead>' + head + '</thead>';
+  var tbody = document.createElement('tbody');
+  STORES.forEach(function(s) {
+    var row = '<tr><td class="admin-store">' + s + '</td>';
+    weeks.forEach(function(w) {
+      var entry = (byStore[s] || []).find(function(e) { return e.weekOf === w; });
+      if (!entry) { row += '<td class="admin-miss">—</td>'; return; }
+      var dots = '<div class="admin-cell-dots">';
+      STEPS.forEach(function(st) {
+        var v = (entry.ratings || {})[st.key] || '';
+        dots += '<span class="admin-cell-dot ' + v + '" title="' + st.label + ': ' + (v || 'none') + '"></span>';
+      });
+      dots += '</div>';
+      row += '<td>' + dots + '</td>';
+    });
+    row += '</tr>';
+    tbody.innerHTML += row;
+  });
+  tbl.appendChild(tbody);
+  wrap.appendChild(tbl);
+  body.appendChild(wrap);
+
+  // Missing submissions this week
+  var thisWeek = getWeekOf();
+  var missing = STORES.filter(function(s) {
+    return !(byStore[s] || []).some(function(e) { return e.weekOf === thisWeek; });
+  });
+  if (missing.length) {
+    var t2 = document.createElement('div');
+    t2.className = 'admin-section-title';
+    t2.textContent = 'Not yet submitted — week of ' + formatWeekForDisplay(thisWeek);
+    body.appendChild(t2);
+    var mw = document.createElement('div');
+    mw.className = 'admin-error';
+    mw.style.background = '#fff8ec';
+    mw.style.borderColor = '#f0d8a2';
+    mw.style.color = '#7a5210';
+    mw.textContent = missing.join(', ');
+    body.appendChild(mw);
+  }
+}
+
+// ── STARTUP ──────────────────────────────────────────
+function init() {
+  // If ?admin=1 in URL, go straight to the admin screen
+  var qs = new URLSearchParams(location.search);
+  if (qs.get('admin') === '1') {
+    openAdmin();
+    return;
+  }
+  renderStorePill();
+  if (!getStore()) openStorePicker();
+}
+
+// ── TOUCH HANDLING FOR HOME TILES ───────────────────
+document.querySelectorAll('.tile, .topbar-back').forEach(function(el) {
+  el.addEventListener('touchend', function(e) {
+    e.preventDefault();
+    var fn = el.getAttribute('onclick');
+    if (fn) { eval(fn); }
+  }, { passive: false });
+});
+
+init();
+</script>
+
+
+</body></html>
