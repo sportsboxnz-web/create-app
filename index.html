@@ -1512,6 +1512,63 @@ html, body {
   border-radius: 8px; padding: 10px 12px; font-size: 12px;
   margin: 10px 6px;
 }
+
+/* RAG stacked bars — overall by step */
+.step-rag-card {
+  background: #fff; border: 1px solid var(--td-grey-md);
+  border-radius: 10px; padding: 4px 0; margin-bottom: 10px;
+}
+.step-rag-row {
+  display: grid;
+  grid-template-columns: 115px 1fr auto;
+  gap: 10px; align-items: center;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--td-grey-lt);
+}
+.step-rag-row:last-child { border-bottom: none; }
+.step-rag-label { font-size: 12.5px; font-weight: 700; color: var(--td-ink); }
+.rag-bar {
+  display: flex; height: 12px; min-width: 60px;
+  border-radius: 4px; overflow: hidden;
+  background: var(--td-grey-lt);
+}
+.rag-seg { height: 100%; }
+.rag-seg.red   { background: var(--red); }
+.rag-seg.amber { background: var(--amber); }
+.rag-seg.green { background: var(--go); }
+.rag-counts {
+  font-size: 11px; font-variant-numeric: tabular-nums; white-space: nowrap;
+}
+.rag-counts .r, .rag-counts .a, .rag-counts .g { font-weight: 700; margin-right: 2px; }
+.rag-counts .r { color: var(--red); }
+.rag-counts .a { color: var(--amber); }
+.rag-counts .g { color: var(--go); }
+.rag-counts .sep { color: var(--td-grey-md); margin: 0 4px; }
+
+/* RAG matrix — per store × step */
+.rag-matrix-wrap { overflow-x: auto; background: #fff; border: 1px solid var(--td-grey-md); border-radius: 10px; }
+.rag-matrix { border-collapse: collapse; width: 100%; font-size: 12px; }
+.rag-matrix th, .rag-matrix td {
+  padding: 8px 8px; text-align: center;
+  border-bottom: 1px solid var(--td-grey-lt);
+  white-space: nowrap;
+}
+.rag-matrix th {
+  background: var(--td-green-xl); font-weight: 700;
+  color: var(--td-green-dk); font-size: 11px;
+  letter-spacing: 0.3px; text-transform: uppercase;
+  position: sticky; top: 0;
+}
+.rag-matrix td.rag-store { text-align: left; font-weight: 700; color: var(--td-ink); }
+.rag-matrix td.rag-miss { color: var(--td-grey); }
+.rag-matrix .rag-mini {
+  display: flex; width: 64px; height: 10px; margin: 0 auto 2px;
+  border-radius: 3px; overflow: hidden; background: var(--td-grey-lt);
+}
+.rag-matrix .rag-mini-counts {
+  font-size: 10px; color: var(--td-ink-md);
+  font-variant-numeric: tabular-nums;
+}
 </style>
 </head>
 <body>
@@ -2680,7 +2737,7 @@ function renderAdmin(entries) {
     return;
   }
 
-  // Summary of most recent entry per store
+  // Group entries by store (sorted newest first)
   var byStore = {};
   entries.forEach(function(e) {
     if (!byStore[e.store]) byStore[e.store] = [];
@@ -2690,24 +2747,124 @@ function renderAdmin(entries) {
     byStore[s].sort(function(a,b) { return (b.weekOf || '').localeCompare(a.weekOf || ''); });
   });
 
-  // Count traffic lights across most-recent week per store
-  var counts = { green:0, amber:0, red:0 };
+  // ── All-time RAG counts, overall and per-store, per CREATE step ──
+  var overallByStep = {};   // { C: {green,amber,red}, ... }
+  var byStoreByStep = {};   // { 'Whangarei': { C: {green,amber,red}, ... }, ... }
+  STEPS.forEach(function(st) {
+    overallByStep[st.key] = { green:0, amber:0, red:0 };
+  });
   STORES.forEach(function(s) {
-    var latest = byStore[s] && byStore[s][0];
-    if (!latest) return;
+    byStoreByStep[s] = {};
     STEPS.forEach(function(st) {
-      var v = (latest.ratings || {})[st.key];
-      if (v && counts[v] !== undefined) counts[v]++;
+      byStoreByStep[s][st.key] = { green:0, amber:0, red:0 };
     });
+  });
+  entries.forEach(function(e) {
+    STEPS.forEach(function(st) {
+      var v = (e.ratings || {})[st.key];
+      if (!v) return;
+      if (overallByStep[st.key][v] !== undefined) overallByStep[st.key][v]++;
+      if (byStoreByStep[e.store] && byStoreByStep[e.store][st.key][v] !== undefined) {
+        byStoreByStep[e.store][st.key][v]++;
+      }
+    });
+  });
+
+  // Grand totals (all time, all stores, all steps)
+  var counts = { green:0, amber:0, red:0 };
+  STEPS.forEach(function(st) {
+    counts.green += overallByStep[st.key].green;
+    counts.amber += overallByStep[st.key].amber;
+    counts.red   += overallByStep[st.key].red;
   });
 
   var sum = document.createElement('div');
   sum.className = 'admin-summary';
   sum.innerHTML =
-    '<div class="admin-summary-card"><div class="admin-summary-val green">' + counts.green + '</div><div class="admin-summary-lab">Green</div></div>' +
-    '<div class="admin-summary-card"><div class="admin-summary-val amber">' + counts.amber + '</div><div class="admin-summary-lab">Amber</div></div>' +
-    '<div class="admin-summary-card"><div class="admin-summary-val red">' + counts.red + '</div><div class="admin-summary-lab">Red</div></div>';
+    '<div class="admin-summary-card"><div class="admin-summary-val green">' + counts.green + '</div><div class="admin-summary-lab">Green · all time</div></div>' +
+    '<div class="admin-summary-card"><div class="admin-summary-val amber">' + counts.amber + '</div><div class="admin-summary-lab">Amber · all time</div></div>' +
+    '<div class="admin-summary-card"><div class="admin-summary-val red">' + counts.red + '</div><div class="admin-summary-lab">Red · all time</div></div>';
   body.appendChild(sum);
+
+  // ── NEW SECTION 1: By CREATE step — All stores (all time) ──
+  function ragBarHTML(c, klass) {
+    var total = c.green + c.amber + c.red;
+    if (total === 0) {
+      return '<div class="' + (klass || 'rag-bar') + '"></div>';
+    }
+    var r = (c.red / total) * 100;
+    var a = (c.amber / total) * 100;
+    var g = (c.green / total) * 100;
+    return '<div class="' + (klass || 'rag-bar') + '">' +
+      '<div class="rag-seg red"   style="width:' + r + '%"></div>' +
+      '<div class="rag-seg amber" style="width:' + a + '%"></div>' +
+      '<div class="rag-seg green" style="width:' + g + '%"></div>' +
+    '</div>';
+  }
+  function ragCountsHTML(c) {
+    return '<span class="rag-counts"><span class="r">' + c.red + '</span>R' +
+           '<span class="sep">·</span>' +
+           '<span class="a">' + c.amber + '</span>A' +
+           '<span class="sep">·</span>' +
+           '<span class="g">' + c.green + '</span>G</span>';
+  }
+
+  var t0 = document.createElement('div');
+  t0.className = 'admin-section-title';
+  t0.textContent = 'By CREATE Step — All Stores (all time)';
+  body.appendChild(t0);
+
+  var stepCard = document.createElement('div');
+  stepCard.className = 'step-rag-card';
+  STEPS.forEach(function(st) {
+    var c = overallByStep[st.key];
+    var row = document.createElement('div');
+    row.className = 'step-rag-row';
+    row.innerHTML =
+      '<div class="step-rag-label">' + st.label + '</div>' +
+      ragBarHTML(c) +
+      ragCountsHTML(c);
+    stepCard.appendChild(row);
+  });
+  body.appendChild(stepCard);
+
+  // ── NEW SECTION 2: By CREATE step — Per store (all time) ──
+  var tMatrix = document.createElement('div');
+  tMatrix.className = 'admin-section-title';
+  tMatrix.textContent = 'By CREATE Step — Per Store (all time)';
+  body.appendChild(tMatrix);
+
+  var matWrap = document.createElement('div');
+  matWrap.className = 'rag-matrix-wrap';
+  var mat = document.createElement('table');
+  mat.className = 'rag-matrix';
+  var mhead = '<tr><th style="text-align:left">Store</th>';
+  STEPS.forEach(function(st) {
+    // Short header: C, R, E, A, T, E
+    var short = st.label.split(' ')[0];
+    mhead += '<th title="' + st.label + '">' + short + '</th>';
+  });
+  mhead += '</tr>';
+  mat.innerHTML = '<thead>' + mhead + '</thead>';
+  var mbody = document.createElement('tbody');
+  STORES.forEach(function(s) {
+    var row = '<tr><td class="rag-store">' + s + '</td>';
+    STEPS.forEach(function(st) {
+      var c = byStoreByStep[s][st.key];
+      var total = c.green + c.amber + c.red;
+      if (total === 0) { row += '<td class="rag-miss">—</td>'; return; }
+      row += '<td title="' + s + ' · ' + st.label + ' · ' +
+             c.red + 'R / ' + c.amber + 'A / ' + c.green + 'G">' +
+             ragBarHTML(c, 'rag-mini') +
+             '<div class="rag-mini-counts">' + c.red + '/' + c.amber + '/' + c.green + '</div>' +
+             '</td>';
+    });
+    row += '</tr>';
+    mbody.innerHTML += row;
+  });
+  mat.appendChild(mbody);
+  matWrap.appendChild(mat);
+  body.appendChild(matWrap);
 
   // Find the most recent 6 weeks across all stores
   var allWeeks = {};
